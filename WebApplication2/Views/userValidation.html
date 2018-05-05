@@ -1,0 +1,16 @@
+﻿<div class="jumbotron text-left">
+    <div class="container">
+        <form>
+            <div class="form-group">
+                <label>UserName:</label>
+                <input type="text" class="form-control" placeholder="HW" ng-model="userLogInInfo.userName">
+            </div>
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="password" class="form-control" placeholder="123" ng-model="userLogInInfo.userPassword">
+            </div>
+            <button type="submit" class="btn btn-default" ng-disabled="!(userLogInInfo.userPassword && userLogInInfo.userName)" ng-click="ValidateUser(userLogInInfo)">Submit</button>
+            <spn>{{searchMessage}}</spn>
+        </form>
+    </div>
+</div>

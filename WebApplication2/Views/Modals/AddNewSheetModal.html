@@ -1,0 +1,85 @@
+﻿<div class="modal fade" id="newSheetModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add new work sheet</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row rowDistance">
+                    <div class="col-sm-4">
+                        <label for="usr">Customer:</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <select class="form-control" ng-model="objToAdd.customer" ng-options="customer as customer.name for customer in customerList" ng-change="GetCustomersProjects(objToAdd.customer,true)">
+                        </select>
+                    </div>
+                </div>
+                <div class="row rowDistance">
+                    <div class="col-sm-4">
+                        <label for="usr">Project:</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <select class="form-control" ng-model="objToAdd.project" ng-options="project as project.name for project in projectListAddModal" ng-change="GetTasksByProject(objToAdd.project, true)"></select>
+                    </div>
+                </div>
+                <div class="row rowDistance">
+                    <div class="col-sm-4">
+                        <label for="usr">Task:</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <select class="form-control" ng-model="objToAdd.task" ng-options="task as task.name for task in taskListAddModal"></select>
+                    </div>
+                </div>
+                <div class="row rowDistance">
+                    <div class="col-sm-4">
+                        <label for="usr">Date:</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" ng-model="objToAdd.date">
+                    </div>
+                </div>
+
+                <div class="row rowDistance">
+                    <div class="col-sm-4">
+                        <label for="usr">startTime:</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="time" class="form-control" format="hh:mm" ng-model="objToAdd.startHour" required ps-input-time />
+                    </div>
+                </div>
+                <div class="row rowDistance">
+                    <div class="col-sm-4">
+                        <label for="usr">end time:</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="time" class="form-control" format="hh:mm" ng-model="objToAdd.endHour" required ps-input-time />
+                    </div>
+                </div>
+                <div class="row rowDistance">
+                    <div class="col-sm-4">
+                        <label for="usr">duration:</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" ng-value="CalcHourDiff(objToAdd.endHour, objToAdd.startHour)" disabled />
+                    </div>
+                </div>
+
+                <div class="row rowDistance">
+                    <div class="col-sm-4">
+                        <label for="usr">comment:</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" ng-model="objToAdd.comment" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" ng-click="AddWorkSheet(objToAdd)">Add work sheet</button>
+            </div>
+        </div>
+
+    </div>
+</div>

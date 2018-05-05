@@ -1,0 +1,60 @@
+﻿<div class="jumbotron text-center">
+    <h1>hello {{userLogInInfo.userName}}</h1>
+</div>
+
+<div ng-show="userLogInInfo.userId == true" class="container">
+    <div class="row">
+        <button ng-click="OpenNewwSheetModal()" type="button" class="btn btn-primary">Add new working sheet</button>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>Select customer</h3>
+            <ul>
+                <li ng-repeat="customer in customerList" ng-bind-html-unsafe="opt.text" ng-click="GetCustomersProjects(customer, false)">
+                    {{ customer.name }} ({{customer.projCount}}) 
+                </li>
+            </ul>
+
+        </div>
+        <div class="col-sm-6" ng-show="projectList">
+            <h3>Select project</h3>
+            <ul>
+                <li ng-repeat="project in projectList" ng-bind-html-unsafe="opt.text" ng-click="WorkSheetByProjectId(project.id , 0, 'taskName')">
+                    {{ project.name }} ({{project.sheetCount}})
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-striped" ng-show="workSheetList">
+            <thead>
+                <tr>
+                    <td>id</td>
+                    <td>Customer name</td>
+                    <td>Project name</td>
+                    <td>Task name</td>
+                    <td>Date</td>
+                    <td>Start Hour</td>
+                    <td>End Hour</td>
+                    <td>Comment</td>
+                </tr>
+            </thead>
+            <tbody style="vertical-align:middle">
+                <tr ng-repeat="workSheet in workSheetList" ng-click="OpenEditModal(workSheet)" onmouseover="JavaScript:this.style.cursor='pointer'">
+                    <td>{{workSheet.id}}</td>
+                    <td>{{workSheet.taskName}}</td>
+                    <td>{{workSheet.projectName}}</td>
+                    <td>{{workSheet.customerName}}</td>
+                    <td>{{workSheet.dateMonth +  '/' +workSheet.dateDay + '/' +workSheet.dateYear}}</td>
+                    <td>{{workSheet.startHour}}</td>
+                    <td>{{workSheet.endHour}}</td>
+                    <td>{{workSheet.comment}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div ng-include="'Modals/AddNewSheetModal.html'"></div>
+<div ng-include="'Modals/TaskModal.html'"></div>

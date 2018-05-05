@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f168f3b40fb1418a989befa59e7d92e6" Name="Diagram1">
+        <EntityTypeShape EntityType="DbModel.Customer" Width="1.5" PointX="0.75" PointY="1.5" />
+        <EntityTypeShape EntityType="DbModel.Employee" Width="1.5" PointX="5.25" PointY="5.125" />
+        <EntityTypeShape EntityType="DbModel.Project" Width="1.5" PointX="3" PointY="1.375" />
+        <EntityTypeShape EntityType="DbModel.Task" Width="1.5" PointX="5.25" PointY="1.375" />
+        <EntityTypeShape EntityType="DbModel.WorkSheet" Width="1.5" PointX="7.5" PointY="1" />
+        <EntityTypeShape EntityType="DbModel.viewInfo" Width="1.5" PointX="0.75" PointY="4.75" />
+        <AssociationConnector Association="DbModel.FK__Project__custome__25869641" />
+        <AssociationConnector Association="DbModel.FK__WorkSheet__emplo__2E1BDC42" />
+        <AssociationConnector Association="DbModel.FK__Task__projectId__286302EC" />
+        <AssociationConnector Association="DbModel.FK__WorkSheet__taskI__2D27B809" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

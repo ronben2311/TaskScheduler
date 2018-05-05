@@ -1,0 +1,89 @@
+﻿<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit work sheet</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row rowDistance">
+                    <div class="col-sm-4">
+                        <label for="usr">Customer:</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="usr" ng-value="objToEdit.customerName" disabled>
+                    </div>
+                </div>
+                <div class="row rowDistance">
+                    <div class="col-sm-4">
+                        <label for="usr">Project:</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="usr" ng-value="objToEdit.projectName" disabled>
+                    </div>
+                </div>
+                <div class="row rowDistance">
+                    <div class="col-sm-4">
+                        <label for="usr">Task:</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <select class="form-control" ng-model="objToEdit.taskId">
+                            <option ng-repeat="task in taskList" ng-value="{{task.id}}">
+                                {{task.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row rowDistance">
+                    <div class="col-sm-4">
+                        <label for="usr">Date:</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" ng-model="objToEdit.date">
+                    </div>
+                </div>
+
+                <div class="row rowDistance">
+                    <div class="col-sm-4">
+                        <label for="usr">startTime:</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="time" class="form-control" format="hh:mm" ng-model="objToEdit.newStartHour" required ps-input-time />
+                    </div>
+                </div>
+                <div class="row rowDistance">
+                    <div class="col-sm-4">
+                        <label for="usr">end time:</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="time" class="form-control" format="hh:mm" ng-model="objToEdit.newEndHour" required ps-input-time />
+                    </div>
+                </div>
+                <div class="row rowDistance">
+                    <div class="col-sm-4">
+                        <label for="usr">duration:</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" ng-value="CalcHourDiff(objToEdit.newEndHour, objToEdit.newStartHour)" disabled />
+                    </div>
+                </div>
+
+                <div class="row rowDistance">
+                    <div class="col-sm-4">
+                        <label for="usr">comment:</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" ng-model="objToEdit.newComment" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" ng-click="SaveSheet(objToEdit)">Save</button>
+                <button type="button" class="btn btn-danger" ng-click="DeleteSheet(objToEdit.sheetId)">Delete</button>
+            </div>
+        </div>
+
+    </div>
+</div>

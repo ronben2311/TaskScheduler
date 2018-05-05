@@ -1,0 +1,393 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userName" Type="nvarchar" MaxLength="100" />
+          <Property Name="userPassword" Type="nvarchar" MaxLength="200" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="100" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="100" />
+          <Property Name="costPerHour" Type="int" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+          <Property Name="customerId" Type="int" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+          <Property Name="projectId" Type="int" />
+        </EntityType>
+        <EntityType Name="WorkSheet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="taskId" Type="int" />
+          <Property Name="employeeId" Type="int" />
+          <Property Name="sheetDate" Type="date" />
+          <Property Name="startingHour" Type="time" Precision="7" />
+          <Property Name="endingHour" Type="time" Precision="7" />
+          <Property Name="comment" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TasksDB.dbo.viewInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="viewInfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="taskId" Type="int" />
+          <Property Name="employeeId" Type="int" />
+          <Property Name="sheetDate" Type="date" />
+          <Property Name="startingHour" Type="time" Precision="7" />
+          <Property Name="endingHour" Type="time" Precision="7" />
+          <Property Name="TaskName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ProjectName" Type="nvarchar" MaxLength="100" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK__Project__custome__25869641">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="customerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Task__projectId__286302EC">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="projectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkSheet__emplo__2E1BDC42">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="WorkSheet" Type="Self.WorkSheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="WorkSheet">
+              <PropertyRef Name="employeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkSheet__taskI__2D27B809">
+          <End Role="Task" Type="Self.Task" Multiplicity="0..1" />
+          <End Role="WorkSheet" Type="Self.WorkSheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="WorkSheet">
+              <PropertyRef Name="taskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbModelStoreContainer">
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkSheet" EntityType="Self.WorkSheet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="viewInfo" EntityType="Self.viewInfo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [viewInfo].[id] AS [id], 
+    [viewInfo].[taskId] AS [taskId], 
+    [viewInfo].[employeeId] AS [employeeId], 
+    [viewInfo].[sheetDate] AS [sheetDate], 
+    [viewInfo].[startingHour] AS [startingHour], 
+    [viewInfo].[endingHour] AS [endingHour], 
+    [viewInfo].[TaskName] AS [TaskName], 
+    [viewInfo].[ProjectName] AS [ProjectName], 
+    [viewInfo].[CustomerName] AS [CustomerName]
+    FROM [dbo].[viewInfo] AS [viewInfo]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Project__custome__25869641" Association="Self.FK__Project__custome__25869641">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Task__projectId__286302EC" Association="Self.FK__Task__projectId__286302EC">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkSheet__emplo__2E1BDC42" Association="Self.FK__WorkSheet__emplo__2E1BDC42">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="WorkSheet" EntitySet="WorkSheet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkSheet__taskI__2D27B809" Association="Self.FK__WorkSheet__taskI__2D27B809">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="WorkSheet" EntitySet="WorkSheet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TasksDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="DbModel.Customer" />
+          <EntitySet Name="Employees" EntityType="DbModel.Employee" />
+          <EntitySet Name="Projects" EntityType="DbModel.Project" />
+          <EntitySet Name="Tasks" EntityType="DbModel.Task" />
+          <EntitySet Name="WorkSheets" EntityType="DbModel.WorkSheet" />
+          <EntitySet Name="viewInfoes" EntityType="DbModel.viewInfo" />
+          <AssociationSet Name="FK__Project__custome__25869641" Association="DbModel.FK__Project__custome__25869641">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkSheet__emplo__2E1BDC42" Association="DbModel.FK__WorkSheet__emplo__2E1BDC42">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="WorkSheet" EntitySet="WorkSheets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Task__projectId__286302EC" Association="DbModel.FK__Task__projectId__286302EC">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkSheet__taskI__2D27B809" Association="DbModel.FK__WorkSheet__taskI__2D27B809">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="WorkSheet" EntitySet="WorkSheets" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Projects" Relationship="DbModel.FK__Project__custome__25869641" FromRole="Customer" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="userPassword" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="firstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="lastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="costPerHour" Type="Int32" />
+          <NavigationProperty Name="WorkSheets" Relationship="DbModel.FK__WorkSheet__emplo__2E1BDC42" FromRole="Employee" ToRole="WorkSheet" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="customerId" Type="Int32" />
+          <NavigationProperty Name="Customer" Relationship="DbModel.FK__Project__custome__25869641" FromRole="Project" ToRole="Customer" />
+          <NavigationProperty Name="Tasks" Relationship="DbModel.FK__Task__projectId__286302EC" FromRole="Project" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="projectId" Type="Int32" />
+          <NavigationProperty Name="Project" Relationship="DbModel.FK__Task__projectId__286302EC" FromRole="Task" ToRole="Project" />
+          <NavigationProperty Name="WorkSheets" Relationship="DbModel.FK__WorkSheet__taskI__2D27B809" FromRole="Task" ToRole="WorkSheet" />
+        </EntityType>
+        <EntityType Name="WorkSheet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="taskId" Type="Int32" />
+          <Property Name="employeeId" Type="Int32" />
+          <Property Name="sheetDate" Type="DateTime" Precision="0" />
+          <Property Name="startingHour" Type="Time" Precision="7" />
+          <Property Name="endingHour" Type="Time" Precision="7" />
+          <Property Name="comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="DbModel.FK__WorkSheet__emplo__2E1BDC42" FromRole="WorkSheet" ToRole="Employee" />
+          <NavigationProperty Name="Task" Relationship="DbModel.FK__WorkSheet__taskI__2D27B809" FromRole="WorkSheet" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="viewInfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="taskId" Type="Int32" />
+          <Property Name="employeeId" Type="Int32" />
+          <Property Name="sheetDate" Type="DateTime" Precision="0" />
+          <Property Name="startingHour" Type="Time" Precision="7" />
+          <Property Name="endingHour" Type="Time" Precision="7" />
+          <Property Name="TaskName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK__Project__custome__25869641">
+          <End Type="DbModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="DbModel.Project" Role="Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="customerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkSheet__emplo__2E1BDC42">
+          <End Type="DbModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="DbModel.WorkSheet" Role="WorkSheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="WorkSheet">
+              <PropertyRef Name="employeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Task__projectId__286302EC">
+          <End Type="DbModel.Project" Role="Project" Multiplicity="0..1" />
+          <End Type="DbModel.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="projectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkSheet__taskI__2D27B809">
+          <End Type="DbModel.Task" Role="Task" Multiplicity="0..1" />
+          <End Type="DbModel.WorkSheet" Role="WorkSheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="WorkSheet">
+              <PropertyRef Name="taskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DbModelStoreContainer" CdmEntityContainer="TasksDBEntities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="DbModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="DbModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="costPerHour" ColumnName="costPerHour" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="userPassword" ColumnName="userPassword" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="DbModel.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="customerId" ColumnName="customerId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="DbModel.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="projectId" ColumnName="projectId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkSheets">
+            <EntityTypeMapping TypeName="DbModel.WorkSheet">
+              <MappingFragment StoreEntitySet="WorkSheet">
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="endingHour" ColumnName="endingHour" />
+                <ScalarProperty Name="startingHour" ColumnName="startingHour" />
+                <ScalarProperty Name="sheetDate" ColumnName="sheetDate" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+                <ScalarProperty Name="taskId" ColumnName="taskId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="viewInfoes">
+            <EntityTypeMapping TypeName="DbModel.viewInfo">
+              <MappingFragment StoreEntitySet="viewInfo">
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="TaskName" ColumnName="TaskName" />
+                <ScalarProperty Name="endingHour" ColumnName="endingHour" />
+                <ScalarProperty Name="startingHour" ColumnName="startingHour" />
+                <ScalarProperty Name="sheetDate" ColumnName="sheetDate" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+                <ScalarProperty Name="taskId" ColumnName="taskId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,32 @@
+[
+  {
+    "outputFileName": "Scripts/userValidation.min.js",
+    "inputFiles": [
+      "Scripts/userValidation.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Index.min.js",
+    "inputFiles": [
+      "Scripts/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/AjaxCalls.min.js",
+    "inputFiles": [
+      "Scripts/AjaxCalls.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/workSheet.min.js",
+    "inputFiles": [
+      "Scripts/workSheet.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/CoreScripts/dirPagination.min.js",
+    "inputFiles": [
+      "Scripts/CoreScripts/dirPagination.js"
+    ]
+  }
+]
