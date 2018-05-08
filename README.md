@@ -6,8 +6,10 @@ WebApplication2/Views - Index.html - entry point
 WebApplication2/Scripts - JS scripts.
 
 WebApplication2/Controllers - ApiController - each controller inherit from ApiAbstractController class which return EF model context.
-                              Implements DB context per request. WebFroms do not support ApiController by default. Pay attention to                                       WebApiConfig.cs under App_Start
+Implements DB context per request. WebFroms do not support ApiController by default. Pay attention to                                       WebApiConfig.cs under App_Start
 
 WebApplication2/Models - Contain EF model. Each class has an partial class that contain its logic.
+
+
 
 
