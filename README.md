@@ -1,6 +1,5 @@
 # TaskScheduler
-using:
-client side: angular 1 
+Client side: angular 1 
 Server side: C# with Entity Framework, DBcontext per request concept. ApiController.
 Data base: SqlServer, Database creation with realtion between tables. Index usage. 
 
