@@ -1,5 +1,10 @@
 # TaskScheduler
-Made with angular 1 at client side, C# with Entity Framework, web forms project with ApiController, DBcontext per request concept. CreateDB.sql and InsertData should run for DB usage.
+using:
+client side: angular 1 
+Server side: C# with Entity Framework, DBcontext per request concept. ApiController.
+Data base: SqlServer, Database creation with realtion between tables. Index usage. 
+
+CreateDB.sql and InsertData should run for DB usage.
 
 WebApplication2/Views - Index.html - entry point
 
